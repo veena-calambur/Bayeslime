@@ -34,7 +34,7 @@ def tabular_example():
 	# Gene
 	fig = exp.as_pyplot_figure(label=1)
 	plt.tight_layout()
-	plt.savefig("sample_with_fixed_amount.pdf")
+	plt.savefig("sample_with_fixed_amount.png")
 	plt.cla()
 
 	string = "Sampling with a predefined sampling amount we get\n"
@@ -55,7 +55,7 @@ def tabular_example():
 
 	fig = exp.as_pyplot_figure(label=1)
 	plt.tight_layout()
-	plt.savefig("sample_until_confident.pdf")
+	plt.savefig("sample_until_confident.png")
 
 	string = "Sampling until we are 95% confident we have found the correct feature importances\n"
 	string += "the following feature importances and 95% credible intervals:"

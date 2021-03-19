@@ -47,7 +47,7 @@ exp = explainer.explain_instance(test[1],
 
 Note, the plotting still works the same as in lime with the addition of the credible intervals.  For example, the previous command on the iris dataset generates the following plot.
 
-![vis](sample_until_confident.pdf)
+![vis](sample_until_confident.png)
 
 
 
