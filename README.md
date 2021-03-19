@@ -34,7 +34,7 @@ This will return the following explanation.
 
 The interpretation is that the feature importance of the most important feature is 0.273.  The uncertainty (defined as the 95% credible interval is (0.242, 0.303).  Because we're being bayesian, the uncertainty *has an intuitive interpretation*. result means the *true* feature importance will be found in this range 95% of the time. 
 
-Bayeslime also includes additional methods to generate explanations to make sure they're confident.  For example, we can run the explanation until we're 95% sure the ranking of the feature importances is correct. Using the following configuration, this will increase the number of samples used in batches of 1,000  until we've collected enough samples for us to be confident in the explanation.
+Bayeslime also includes additional methods to generate explanations to make sure they're confident.  For example, we can run the explanation until we're 95% sure the ranking of the feature importances is correct. Using the following configuration, this will increase the number of samples used in batches of 1,000  until we've collected enough samples for us to be 95% sure the ranking of feature importances is correct.
 
 ```sh
 exp = explainer.explain_instance(test[1], 
