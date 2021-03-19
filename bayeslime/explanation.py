@@ -139,7 +139,8 @@ class Explanation(object):
         """
         label_to_use = label if self.mode == "classification" else self.dummy_label
         ans = self.domain_mapper.map_exp_ids(self.local_exp[label_to_use], **kwargs)
-        ans = [(x[0], float(x[1])) for x in ans]
+        
+        ans = [(x[0], float(x[1]), x[2]) for x in ans]
         return ans
 
     def as_map(self):
@@ -168,11 +169,14 @@ class Explanation(object):
         fig = plt.figure()
         vals = [x[1] for x in exp]
         names = [x[0] for x in exp]
+
+        errors = [np.abs(x[2][0] - x[2][1])/2 for x in exp]
         vals.reverse()
         names.reverse()
+        errors.reverse()
         colors = ['green' if x > 0 else 'red' for x in vals]
         pos = np.arange(len(exp)) + .5
-        plt.barh(pos, vals, align='center', color=colors)
+        plt.barh(pos, vals, align='center', color=colors, xerr=errors)
         plt.yticks(pos, names)
         if self.mode == "classification":
             title = 'Local explanation for class %s' % self.class_names[label]
@@ -239,6 +243,8 @@ class Explanation(object):
         Returns:
             code for an html page, including javascript includes.
         """
+
+        raise NotImplementedError
 
         def jsonize(x):
             return json.dumps(x, ensure_ascii=False)

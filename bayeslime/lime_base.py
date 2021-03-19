@@ -6,6 +6,8 @@ import scipy as sp
 from sklearn.linear_model import Ridge, lars_path
 from sklearn.utils import check_random_state
 
+from . import bayes_regression
+
 
 class LimeBase(object):
     """Class for learning a locally linear sparse model from perturbed data"""
@@ -141,7 +143,8 @@ class LimeBase(object):
                                    label,
                                    num_features,
                                    feature_selection='auto',
-                                   model_regressor=None):
+                                   model_regressor=None,
+                                   percent=95):
         """Takes perturbed data, labels and distances, returns explanation.
 
         Args:
@@ -185,23 +188,41 @@ class LimeBase(object):
                                                weights,
                                                num_features,
                                                feature_selection)
+        regressor_name = model_regressor
+
         if model_regressor is None:
             model_regressor = Ridge(alpha=1, fit_intercept=True,
                                     random_state=self.random_state)
+        
+        elif model_regressor is "bayes":
+            model_regressor = bayes_regression.BayesLR(percent)
+
         easy_model = model_regressor
         easy_model.fit(neighborhood_data[:, used_features],
                        labels_column, sample_weight=weights)
-        prediction_score = easy_model.score(
-            neighborhood_data[:, used_features],
-            labels_column, sample_weight=weights)
-
-        local_pred = easy_model.predict(neighborhood_data[0, used_features].reshape(1, -1))
+            
+        if regressor_name is not "bayes":
+            prediction_score = easy_model.score(
+                neighborhood_data[:, used_features],
+                labels_column, sample_weight=weights)
+            local_pred = easy_model.predict(neighborhood_data[0, used_features].reshape(1, -1))
+        else:
+            prediction_score = easy_model.score
+            local_pred = None
 
         if self.verbose:
             print('Intercept', easy_model.intercept_)
             print('Prediction_local', local_pred,)
             print('Right:', neighborhood_labels[0, label])
+
+        zipped = list(zip(used_features, easy_model.coef_, easy_model.creds))
+
+        for i, item in enumerate(zipped):
+            creds = (zipped[i][1] - zipped[i][2], zipped[i][1] + zipped[i][2])
+            errs = zipped[i][2]
+            zipped[i] = (zipped[i][0], zipped[i][1], creds, errs)
+
         return (easy_model.intercept_,
-                sorted(zip(used_features, easy_model.coef_),
+                sorted(zipped,
                        key=lambda x: np.abs(x[1]), reverse=True),
-                prediction_score, local_pred)
+                prediction_score, local_pred, easy_model.confident)
