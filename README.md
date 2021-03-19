@@ -12,16 +12,16 @@ Bayeslime is structured to be familiar if you've worked with lime before. For ex
 
 ```sh
 explainer = bayeslime.lime_tabular.LimeTabularExplainer(train,
-													   feature_names=iris.feature_names, 
-													   class_names=iris.target_names, 
-													   discretize_continuous=True)
+                                                       feature_names=iris.feature_names, 
+                                                       class_names=iris.target_names, 
+                                                       discretize_continuous=True)
 
 
 exp = explainer.explain_instance(test[1], 
-	 						     rf.predict_proba, 
-	 						     num_features=4, 
-	 						     labels=(1,),
-	 						     num_samples=1_000)
+                                 rf.predict_proba, 
+                                 num_features=4, 
+                                 labels=(1,),
+                                 num_samples=1_000)
 
 exp.as_list()
 ```
