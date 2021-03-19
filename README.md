@@ -1,6 +1,6 @@
 # lime + Bayeslime
 
-This project is a friendly fork of Lime to incorporate Bayeslime.  Bayeslime is a bayesian variant of the original lime framework that measure the *uncertainty* of any given explanation.
+This project is a friendly fork of Lime to incorporate Bayeslime.  Bayeslime is a bayesian variant of the original lime framework that measure the *uncertainty* of any given explanation, first proposed in [our paper](https://arxiv.org/abs/2008.05030).
 
 Why is this good? This allows us to express whether we're confident we've found a good explanation. Meaning, with Bayeslime we can say we're 95% sure the feature importances for any given explanation fall in a certain range. 
 
