@@ -47,7 +47,35 @@ exp = explainer.explain_instance(test[1],
 
 Note, the plotting still works the same as in lime with the addition of the credible intervals.  For example, the previous command on the iris dataset generates the following plot.
 
-{:refdef: style="text-align: center;"}  ![vis](sample_until_confident.png){: width="200" } {: refdef}
+ ![vis](sample_until_confident.png)
+
+The black bars correspond to the 95% credible interval.
+
+## Under Construction
+
+Note that there's a lot more features in the paper that are still being added to this implementation and this is still very much under construction. Currently, only the tabular explainer is equipped for bayeslime. 
+
+TODO's include: 
+
+1. Implementing text and image explainers
+2. Adding estimated time to compute a confident explanation based on theorem 3.2
+3. Visualization of feature importance distribution from the paper
+4. Adding uncertainty sampling
+
+## Paper
+
+The original paper is avaliable [here](https://arxiv.org/abs/2008.05030)
+
+You can cite us:
+
+```sh
+@article{Slack2020howmuchshoulditrustyou, 
+    title={How Much Should I Trust You? Modeling Uncertainty of Black Box Explanations}, 
+    author={Dylan Slack and Sophie Hilgard and Emily Jia and Sameer Singh and Himabindu Lakkaraju}, 
+    journal={arXiv}, year={2020}}
+```
+
+
 
 
 
