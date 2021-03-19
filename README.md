@@ -68,7 +68,7 @@ The original paper is avaliable [here](https://arxiv.org/abs/2008.05030)
 
 You can cite us:
 
-```sh
+```
 @article{Slack2020howmuchshoulditrustyou, 
     title={How Much Should I Trust You? Modeling Uncertainty of Black Box Explanations}, 
     author={Dylan Slack and Sophie Hilgard and Emily Jia and Sameer Singh and Himabindu Lakkaraju}, 
