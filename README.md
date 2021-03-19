@@ -51,6 +51,8 @@ Note, the plotting still works the same as in lime with the addition of the cred
 
 The black bars correspond to the 95% credible interval.
 
+An example walking through these features can be found in the `bayes_lime_examples.py` file.
+
 ## Under Construction
 
 Note that there's a lot more features in the paper that are still being added to this implementation and this is still very much under construction. Currently, only the tabular explainer is equipped for bayeslime. 
